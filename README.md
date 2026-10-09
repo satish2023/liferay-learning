@@ -1,2 +1,1 @@
 # liferay-learning
-liferay learnign

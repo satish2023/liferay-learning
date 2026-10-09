@@ -1,0 +1,12 @@
+dependencies {
+	api project(":modules:item:item-api")
+
+	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+}
+
+buildService {
+	apiDir = "../item-api/src/main/java"
+	testDir = "../item-test/src/testIntegration/java"
+}
+
+group = "com.example.item"

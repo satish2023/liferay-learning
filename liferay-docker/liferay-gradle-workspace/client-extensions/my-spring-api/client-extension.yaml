@@ -1,0 +1,20 @@
+assemble:
+    - fromTask: bootJar
+
+my-spring-api-oauth:
+    .serviceAddress: miniature-invention-46965jx5xxq27x5q-8082.app.github.dev
+    .serviceScheme: https
+
+    name: My Spring API OAuth
+    type: oAuthApplicationUserAgent
+
+    allowedWebOrigins:
+        - https://miniature-invention-46965jx5xxq27x5q-8081.app.github.dev
+
+    redirectURIs:
+        - https://miniature-invention-46965jx5xxq27x5q-8081.app.github.dev/o/oauth2/redirect
+
+    scopes:
+        - openid
+        - profile
+        - roles

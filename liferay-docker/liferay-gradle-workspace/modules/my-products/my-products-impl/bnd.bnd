@@ -1,0 +1,3 @@
+Bundle-Name: my-products-impl
+Bundle-SymbolicName: com.example.products.impl
+Bundle-Version: 1.0.0

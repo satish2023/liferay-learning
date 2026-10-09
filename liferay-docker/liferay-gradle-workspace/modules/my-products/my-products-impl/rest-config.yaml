@@ -1,0 +1,9 @@
+apiDir: "../my-products-api/src/main/java"
+apiPackagePath: "com.example.products"
+application:
+    baseURI: "/my-products"
+    className: "MyProductsApplication"
+    name: "MyProducts"
+author: "codespace"
+clientDir: "../my-products-client/src/main/java"
+testDir: "../my-products-test/src/testIntegration/java"

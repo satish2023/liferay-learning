@@ -1,0 +1,3 @@
+Bundle-Name: my-products-client
+Bundle-SymbolicName: com.example.products.client
+Bundle-Version: 1.0.0

@@ -1,0 +1,6 @@
+Bundle-Name: my-products-api
+Bundle-SymbolicName: com.example.products.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.example.products.dto.v1_0,\
+	com.example.products.resource.v1_0

@@ -1,0 +1,66 @@
+services:
+  postgres:
+    image: postgres:13
+    container_name: postgres1
+    ports:
+      - "5432:5432" # Maps Postgres to the host gateway
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: postgresDb
+    volumes:
+      - ./volumes/postgres/data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d postgresDb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    deploy:
+      resources:
+        limits:
+          memory: 2g # Sufficient for local dev schemas
+        reservations:
+          memory: 512m
+    networks:
+      - liferay-net
+
+  liferay:
+    image: liferay/portal:7.4.3.120-ga120
+    container_name: liferay1
+    ports:
+      - "8010:8010"
+      - "8081:8080"
+      - "8443:8443"
+      - "11311:11311"
+    environment:
+      LIFERAY_JPDA_ENABLED: "true"
+      JPDA_ADDRESS: 8000
+      JPDA_TRANSPORT: dt_socket
+    depends_on:
+      postgres:
+        condition: service_healthy
+    # --- ADDED TO ROUTE BEYOND CODESPACE VIRTUAL NETWORKS ---
+    extra_hosts:
+      - "postgres-host:host-gateway"
+      - "host.docker.internal:host-gateway"
+    deploy:
+      resources:
+        limits:
+          memory: 16g # Covers JVM Heap (6GB) + Metaspace (1.5GB) + Native memory & OSGi
+        reservations:
+          memory: 12g
+    volumes:
+      - ./volumes/liferay/data:/opt/liferay/data
+      - ./volumes/liferay/portal-ext.properties:/opt/liferay/portal-ext.properties
+      - ./volumes/liferay/deploy:/opt/liferay/deploy
+       # Maps a local folder directly into Liferay's Client Extension hot-deploy system
+      - ./volumes/liferay/client-extensions:/opt/liferay/osgi/client-extensions
+      - ./volumes/liferay/tomcat/bin/setenv.sh:/opt/liferay/tomcat/bin/setenv.sh
+      - ./volumes/liferay/osgi/modules:/opt/liferay/osgi/modules
+      - ./volumes/liferay/osgi/war:/opt/liferay/osgi/war
+    networks:
+      - liferay-net
+
+networks:
+  liferay-net:
+    driver: bridge

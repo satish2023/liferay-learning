@@ -1,0 +1,43 @@
+openapi: 3.0.1
+
+info:
+    title: MyProducts
+    version: v1.0
+    description: MyProducts REST API
+    license:
+        name: Apache 2.0
+        url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+paths:
+    /products:
+        get:
+            operationId: getProducts
+            security: []
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Product'
+                        application/xml:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Product'
+                    description: OK
+
+components:
+    schemas:
+        Product:
+            properties:
+                id:
+                    format: int64
+                    type: integer
+                name:
+                    type: string
+                price:
+                    format: double
+                    type: number
+            type: object

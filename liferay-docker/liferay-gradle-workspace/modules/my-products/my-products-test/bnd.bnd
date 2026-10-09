@@ -1,0 +1,5 @@
+Bundle-Name: my-products-test
+Bundle-SymbolicName: com.example.products.test
+Bundle-Version: 1.0.0
+-includeresource: com.example.products.client.jar=../my-products-client/build/libs/com.example.products.client-1.0.0.jar;lib:=true
+-provider-policy: ${replacestring;${range;[==,==]};.*,(.*)];$1}

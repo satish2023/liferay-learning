@@ -1,0 +1,13 @@
+my-react-extension:
+    name: My React Vite Widget
+    type: customElement
+    htmlElementName: my-react-extension
+    instanceable: true
+    urls:
+        - assets/index.js
+    cssURLs:
+        - assets/index.css
+
+assemble:
+  - from: dist
+    into: static

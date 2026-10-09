@@ -1,0 +1,7 @@
+dependencies {
+	api project(":modules:my-products:my-products-api")
+
+	compileOnly group: "com.liferay.portal", name: "release.portal.api"
+}
+group = "com.example.products"
+
